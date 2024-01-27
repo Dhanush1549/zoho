@@ -1,0 +1,321 @@
+{% extends 'base.html' %}
+
+{% block content%}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+    }
+
+    form {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .form-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    label,
+    input,
+    select {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Media Query for Responsive Design */
+    @media screen and (min-width: 768px) {
+        .form-row {
+            margin-bottom: 20px;
+        }
+
+        label,
+        input,
+        select {
+            width: calc(45% - 10px);
+        }
+    }
+</style>
+
+<body>
+    <h1>Add Customer</h1>
+    <form method="post" action="{% url 'add_customer' %}">
+        {% csrf_token %}
+        <br><br>
+
+        <div class="form-row">
+            <label for="CustomerType">Customer Type:</label>
+            <input type="text" name="CustomerType" required>
+        </div>
+
+        <div class="form-row">
+            <label for="Title">Title:</label>
+            <input type="text" name="Title" required>
+        </div>
+
+        <div class="form-row">
+            <label for="FirstName">First Name:</label>
+            <input type="text" name="FirstName" required>
+        </div>
+
+        <div class="form-row">
+            <label for="LastName">Last Name:</label>
+            <input type="text" name="LastName" required>
+        </div>
+
+        <div class="form-row">
+            <label for="CustomerDisplayName">Customer Display Name:</label>
+            <input type="text" name="CustomerDisplayName" required>
+        </div>
+
+        <div class="form-row">
+            <label for="CompanyName">Company Name:</label>
+            <input type="text" name="CompanyName" required>
+        </div>
+
+        <div class="form-row">
+            <label for="CustomerEmail">Customer Email:</label>
+            <input type="email" name="CustomerEmail" required>
+        </div>
+
+        <div class="form-row">
+            <label for="CustomerPhone">Customer Phone:</label>
+            <input type="text" name="CustomerPhone" required>
+        </div>
+
+        <div class="form-row">
+            <label for="CustomerMobile">Customer Mobile:</label>
+            <input type="text" name="CustomerMobile" required>
+        </div>
+
+        <div class="form-row">
+            <label for="SkypeName">Skype Name/Number (Optional):</label>
+            <input type="text" name="SkypeName">
+        </div>
+
+        <div class="form-row">
+            <label for="Designation">Designation (Optional):</label>
+            <input type="text" name="Designation">
+        </div>
+
+        <div class="form-row">
+            <label for="Department">Department (Optional):</label>
+            <input type="text" name="Department">
+        </div>
+
+        <div class="form-row">
+            <label for="Website">Website (Optional):</label>
+            <input type="text" name="Website">
+        </div>
+
+        <div class="form-row">
+            <label for="GSTTreatment">GST Treatment (Optional):</label>
+            <input type="text" name="GSTTreatment">
+        </div>
+
+        <div class="form-row">
+            <label for="GSTNumber">GST Number (Optional):</label>
+            <input type="text" name="GSTNumber">
+        </div>
+
+        <div class="form-row">
+            <label for="PanNumber">Pan Number (Optional):</label>
+            <input type="text" name="PanNumber">
+        </div>
+
+        <div class="form-row">
+            <label for="PlaceOfSupply">Place of Supply (Optional):</label>
+            <input type="text" name="PlaceOfSupply">
+        </div>
+
+        <div class="form-row">
+            <label for="TaxPreference">Tax Preference (Optional):</label>
+            <input type="text" name="TaxPreference">
+        </div>
+
+        <div class="form-row">
+            <label for="Currency">Currency (Optional):</label>
+            <input type="text" name="Currency">
+        </div>
+
+        <div class="form-row">
+            <label for="OpeningBalanceType">Opening Balance Type:</label>
+            <input type="text" name="OpeningBalanceType" required>
+        </div>
+
+        <div class="form-row">
+            <label for="OpeningBalance">Opening Balance:</label>
+            <input type="number" name="OpeningBalance" required>
+        </div>
+
+        <div class="form-row">
+            <label for="CreditLimit">Credit Limit:</label>
+            <input type="number" name="CreditLimit" required>
+        </div>
+
+        <div class="form-row">
+            <label for="PriceList">Price List (Optional):</label>
+            <input type="text" name="PriceList">
+        </div>
+
+        <div class="form-row">
+            <label for="PortalLanguage">Portal Language (Optional):</label>
+            <input type="text" name="PortalLanguage">
+        </div>
+
+        <div class="form-row">
+            <label for="Facebook">Facebook (Optional):</label>
+            <input type="text" name="Facebook">
+        </div>
+
+        <div class="form-row">
+            <label for="Twitter">Twitter (Optional):</label>
+            <input type="text" name="Twitter">
+        </div>
+
+        <div class="form-row">
+            <label for="CompanyPaymentTerms">Company Payment Terms (FK):</label>
+            <select name="CompanyPaymentTerms" required>
+                <!-- Add options based on your FK relationship -->
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+
+        <div class="form-row">
+            <label for="CurrentBalance">Current Balance:</label>
+            <input type="number" name="CurrentBalance" required>
+        </div>
+
+        <div class="form-row">
+            <label for="BillingAttention">Billing Attention:</label>
+            <input type="text" name="BillingAttention" required>
+        </div>
+
+        <div class="form-row">
+            <label for="BillingAddress">Billing Address:</label>
+            <input type="text" name="BillingAddress" required>
+        </div>
+
+        <div class="form-row">
+            <label for="BillingCity">Billing City:</label>
+            <input type="text" name="BillingCity" required>
+        </div>
+
+        <div class="form-row">
+            <label for="BillingState">Billing State:</label>
+            <input type="text" name="BillingState" required>
+        </div>
+
+        <div class="form-row">
+            <label for="BillingCountry">Billing Country:</label>
+            <input type="text" name="BillingCountry" required>
+        </div>
+
+        <div class="form-row">
+            <label for="BillingPinCode">Billing Pin Code:</label>
+            <input type="text" name="BillingPinCode" required>
+        </div>
+
+        <div class="form-row">
+            <label for="BillingMobile">Billing Mobile:</label>
+            <input type="text" name="BillingMobile" required>
+        </div>
+
+        <div class="form-row">
+            <label for="BillingFax">Billing Fax:</label>
+            <input type="text" name="BillingFax" required>
+        </div>
+
+        <div class="form-row">
+            <label for="ShippingAttention">Shipping Attention:</label>
+            <input type="text" name="ShippingAttention" required>
+        </div>
+
+        <div class="form-row">
+            <label for="ShippingAddress">Shipping Address:</label>
+            <input type="text" name="ShippingAddress" required>
+        </div>
+
+        <div class="form-row">
+            <label for="ShippingCity">Shipping City:</label>
+            <input type="text" name="ShippingCity" required>
+        </div>
+
+        <div class="form-row">
+            <label for="ShippingState">Shipping State:</label>
+            <input type="text" name="ShippingState" required>
+        </div>
+
+        <div class="form-row">
+            <label for="ShippingCountry">Shipping Country:</label>
+            <input type="text" name="ShippingCountry" required>
+        </div>
+
+        <div class="form-row">
+            <label for="ShippingPinCode">Shipping Pin Code:</label>
+            <input type="text" name="ShippingPinCode" required>
+        </div>
+
+        <div class="form-row">
+            <label for="ShippingMobile">Shipping Mobile:</label>
+            <input type="text" name="ShippingMobile" required>
+        </div>
+
+        <div class="form-row">
+            <label for="ShippingFax">Shipping Fax:</label>
+            <input type="text" name="ShippingFax" required>
+        </div>
+
+        <div class="form-row">
+            <label for="Remarks">Remarks:</label>
+            <input type="text" name="Remarks" required>
+        </div>
+
+        <div class="form-row">
+            <label for="CustomerStatus">Customer Status:</label>
+            <input type="text" name="CustomerStatus" required>
+        </div>
+
+        <div class="form-row">
+            <label for="Company">Company (FK):</label>
+            <select name="Company" required>
+                <!-- Add options based on your FK relationship -->
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+
+        <div class="form-row">
+            <label for="LoginDetails">Login Details (FK):</label>
+            <select name="LoginDetails" required>
+                <!-- Add options based on your FK relationship -->
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+
+        <button type="submit">Save</button>
+    </form>
+
+    <a href="{% url 'customer_list' %}">Back to Customer List</a>
+</body>
+
+{% endblock %}

@@ -1,4 +1,5 @@
 from django.db import models
+from Register_Login.models import *
 
 class Customer(models.Model):
     CustomerType = models.CharField(max_length=50)
@@ -27,7 +28,7 @@ class Customer(models.Model):
     PortalLanguage = models.CharField(max_length=50, null=True, blank=True)
     Facebook = models.CharField(max_length=100, null=True, blank=True)
     Twitter = models.CharField(max_length=100, null=True, blank=True)
-    CompanyPaymentTerms = models.ForeignKey('YourOtherModel', on_delete=models.CASCADE)
+    CompanyPaymentTerms = models.ForeignKey(PaymentTermsUpdates, on_delete=models.CASCADE)
     CurrentBalance = models.DecimalField(max_digits=18, decimal_places=2)
     BillingAttention = models.CharField(max_length=50)
     BillingAddress = models.CharField(max_length=255)
@@ -47,8 +48,8 @@ class Customer(models.Model):
     ShippingFax = models.CharField(max_length=20)
     Remarks = models.CharField(max_length=255)
     CustomerStatus = models.CharField(max_length=20)
-    Company = models.ForeignKey('YourOtherModel', on_delete=models.CASCADE)
-    LoginDetails = models.ForeignKey('YourOtherModel', on_delete=models.CASCADE)
+    Company = models.ForeignKey(ZohoModules, on_delete=models.CASCADE)
+    LoginDetails = models.ForeignKey(CompanyDetails, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.FirstName} {self.LastName}"

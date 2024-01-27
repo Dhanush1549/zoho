@@ -488,111 +488,115 @@ def staff_password_change(request):
 #     customer        #
     
 def add_customer(request):
-    if request.method == 'POST':
-        customer_type = request.POST.get('CustomerType')
-        title = request.POST.get('Title')
-        first_name = request.POST.get('FirstName')
-        last_name = request.POST.get('LastName')
-        customer_display_name = request.POST.get('CustomerDisplayName')
-        company_name = request.POST.get('CompanyName')
-        customer_email = request.POST.get('CustomerEmail')
-        customer_phone = request.POST.get('CustomerPhone')
-        customer_mobile = request.POST.get('CustomerMobile')
-        skype_name = request.POST.get('SkypeName', None)
-        designation = request.POST.get('Designation', None)
-        department = request.POST.get('Department', None)
-        website = request.POST.get('Website', None)
-        gst_treatment = request.POST.get('GSTTreatment', None)
-        gst_number = request.POST.get('GSTNumber', None)
-        pan_number = request.POST.get('PanNumber', None)
-        place_of_supply = request.POST.get('PlaceOfSupply', None)
-        tax_preference = request.POST.get('TaxPreference', None)
-        currency = request.POST.get('Currency', None)
-        opening_balance_type = request.POST.get('OpeningBalanceType')
-        opening_balance = request.POST.get('OpeningBalance')
-        credit_limit = request.POST.get('CreditLimit')
-        price_list = request.POST.get('PriceList', None)
-        portal_language = request.POST.get('PortalLanguage', None)
-        facebook = request.POST.get('Facebook', None)
-        twitter = request.POST.get('Twitter', None)
-        company_payment_terms = request.POST.get('CompanyPaymentTerms')  
-        current_balance = request.POST.get('CurrentBalance')
-        billing_attention = request.POST.get('BillingAttention')
-        billing_address = request.POST.get('BillingAddress')
-        billing_city = request.POST.get('BillingCity')
-        billing_state = request.POST.get('BillingState')
-        billing_country = request.POST.get('BillingCountry')
-        billing_pin_code = request.POST.get('BillingPinCode')
-        billing_mobile = request.POST.get('BillingMobile')
-        billing_fax = request.POST.get('BillingFax')
-        shipping_attention = request.POST.get('ShippingAttention')
-        shipping_address = request.POST.get('ShippingAddress')
-        shipping_city = request.POST.get('ShippingCity')
-        shipping_state = request.POST.get('ShippingState')
-        shipping_country = request.POST.get('ShippingCountry')
-        shipping_pin_code = request.POST.get('ShippingPinCode')
-        shipping_mobile = request.POST.get('ShippingMobile')
-        shipping_fax = request.POST.get('ShippingFax')
-        remarks = request.POST.get('Remarks')
-        customer_status = request.POST.get('CustomerStatus')
-        company = request.POST.get('Company')  
-        login_details = request.POST.get('LoginDetails')  
+    if 'login_id' in request.session:
+        log_id = request.session['login_id']
+        if 'login_id' not in request.session:
+            return redirect('/')
+        log_details= LoginDetails.objects.get(id=log_id)
+        if log_details.user_type == 'Company':
+            if request.method == 'POST':
+                customer_type = request.POST.get('CustomerType')
+                title = request.POST.get('Title')
+                first_name = request.POST.get('FirstName')
+                last_name = request.POST.get('LastName')
+                customer_display_name = request.POST.get('CustomerDisplayName')
+                company_name = request.POST.get('CompanyName')
+                customer_email = request.POST.get('CustomerEmail')
+                customer_phone = request.POST.get('CustomerPhone')
+                customer_mobile = request.POST.get('CustomerMobile')
+                skype_name = request.POST.get('SkypeName', None)
+                designation = request.POST.get('Designation', None)
+                department = request.POST.get('Department', None)
+                website = request.POST.get('Website', None)
+                gst_treatment = request.POST.get('GSTTreatment', None)
+                gst_number = request.POST.get('GSTNumber', None)
+                pan_number = request.POST.get('PanNumber', None)
+                place_of_supply = request.POST.get('PlaceOfSupply', None)
+                tax_preference = request.POST.get('TaxPreference', None)
+                currency = request.POST.get('Currency', None)
+                opening_balance_type = request.POST.get('OpeningBalanceType')
+                opening_balance = request.POST.get('OpeningBalance')
+                credit_limit = request.POST.get('CreditLimit')
+                price_list = request.POST.get('PriceList', None)
+                portal_language = request.POST.get('PortalLanguage', None)
+                facebook = request.POST.get('Facebook', None)
+                twitter = request.POST.get('Twitter', None)
+                company_payment_terms = request.POST.get('CompanyPaymentTerms')  
+                current_balance = request.POST.get('CurrentBalance')
+                billing_attention = request.POST.get('BillingAttention')
+                billing_address = request.POST.get('BillingAddress')
+                billing_city = request.POST.get('BillingCity')
+                billing_state = request.POST.get('BillingState')
+                billing_country = request.POST.get('BillingCountry')
+                billing_pin_code = request.POST.get('BillingPinCode')
+                billing_mobile = request.POST.get('BillingMobile')
+                billing_fax = request.POST.get('BillingFax')
+                shipping_attention = request.POST.get('ShippingAttention')
+                shipping_address = request.POST.get('ShippingAddress')
+                shipping_city = request.POST.get('ShippingCity')
+                shipping_state = request.POST.get('ShippingState')
+                shipping_country = request.POST.get('ShippingCountry')
+                shipping_pin_code = request.POST.get('ShippingPinCode')
+                shipping_mobile = request.POST.get('ShippingMobile')
+                shipping_fax = request.POST.get('ShippingFax')
+                remarks = request.POST.get('Remarks')
+                customer_status = request.POST.get('CustomerStatus')
+                company = request.POST.get('Company')  
+                login_details = request.POST.get('LoginDetails')  
 
-        new_customer = Customer(
-            CustomerType=customer_type,
-            Title=title,
-            FirstName=first_name,
-            LastName=last_name,
-            CustomerDisplayName=customer_display_name,
-            CompanyName=company_name,
-            CustomerEmail=customer_email,
-            CustomerPhone=customer_phone,
-            CustomerMobile=customer_mobile,
-            SkypeName=skype_name,
-            Designation=designation,
-            Department=department,
-            Website=website,
-            GSTTreatment=gst_treatment,
-            GSTNumber=gst_number,
-            PanNumber=pan_number,
-            PlaceOfSupply=place_of_supply,
-            TaxPreference=tax_preference,
-            Currency=currency,
-            OpeningBalanceType=opening_balance_type,
-            OpeningBalance=opening_balance,
-            CreditLimit=credit_limit,
-            PriceList=price_list,
-            PortalLanguage=portal_language,
-            Facebook=facebook,
-            Twitter=twitter,
-            CompanyPaymentTerms_id=company_payment_terms,
-            CurrentBalance=current_balance,
-            BillingAttention=billing_attention,
-            BillingAddress=billing_address,
-            BillingCity=billing_city,
-            BillingState=billing_state,
-            BillingCountry=billing_country,
-            BillingPinCode=billing_pin_code,
-            BillingMobile=billing_mobile,
-            BillingFax=billing_fax,
-            ShippingAttention=shipping_attention,
-            ShippingAddress=shipping_address,
-            ShippingCity=shipping_city,
-            ShippingState=shipping_state,
-            ShippingCountry=shipping_country,
-            ShippingPinCode=shipping_pin_code,
-            ShippingMobile=shipping_mobile,
-            ShippingFax=shipping_fax,
-            Remarks=remarks,
-            CustomerStatus=customer_status,
-            Company_id=company,
-            LoginDetails_id=login_details
-        )
-        new_customer.save()
-
-        return redirect('customer_list')  
-
-    return render(request, 'add_customer.html')
+                new_customer = Customer(
+                    CustomerType=customer_type,
+                    Title=title,
+                    FirstName=first_name,
+                    LastName=last_name,
+                    CustomerDisplayName=customer_display_name,
+                    CompanyName=company_name,
+                    CustomerEmail=customer_email,
+                    CustomerPhone=customer_phone,
+                    CustomerMobile=customer_mobile,
+                    SkypeName=skype_name,
+                    Designation=designation,
+                    Department=department,
+                    Website=website,
+                    GSTTreatment=gst_treatment,
+                    GSTNumber=gst_number,
+                    PanNumber=pan_number,
+                    PlaceOfSupply=place_of_supply,
+                    TaxPreference=tax_preference,
+                    Currency=currency,
+                    OpeningBalanceType=opening_balance_type,
+                    OpeningBalance=opening_balance,
+                    CreditLimit=credit_limit,
+                    PriceList=price_list,
+                    PortalLanguage=portal_language,
+                    Facebook=facebook,
+                    Twitter=twitter,
+                    CompanyPaymentTerms_id=company_payment_terms,
+                    CurrentBalance=current_balance,
+                    BillingAttention=billing_attention,
+                    BillingAddress=billing_address,
+                    BillingCity=billing_city,
+                    BillingState=billing_state,
+                    BillingCountry=billing_country,
+                    BillingPinCode=billing_pin_code,
+                    BillingMobile=billing_mobile,
+                    BillingFax=billing_fax,
+                    ShippingAttention=shipping_attention,
+                    ShippingAddress=shipping_address,
+                    ShippingCity=shipping_city,
+                    ShippingState=shipping_state,
+                    ShippingCountry=shipping_country,
+                    ShippingPinCode=shipping_pin_code,
+                    ShippingMobile=shipping_mobile,
+                    ShippingFax=shipping_fax,
+                    Remarks=remarks,
+                    CustomerStatus=customer_status,
+                    Company_id=company,
+                    LoginDetails_id=login_details
+                )
+                new_customer.save()
+            return render(request, 'zohomodules/customer/add_customer.html')
+        return render(request,'zohomodules/customer/add_customer.html')
 
 def customer_list(request):
     customers = Customer.objects.all()
